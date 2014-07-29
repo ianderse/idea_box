@@ -2,8 +2,10 @@ class IdeaStore
 
   def self.save(idea)
     @all ||= []
-    idea.id = next_id
-    @all << idea
+    if idea.new?
+      idea.id = next_id
+      @all << idea
+    end
     idea.id
   end
 

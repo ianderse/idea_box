@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require './lib/ideabox/idea'
+require_relative 'test_helper'
 
 class IdeaTest < Minitest::Test
   def test_basic_idea
@@ -37,5 +35,11 @@ class IdeaTest < Minitest::Test
     ideas = [drink, exercise, diet]
 
     assert_equal [diet, drink, exercise], ideas.sort
+  end
+
+  def test_ideas_have_an_id
+    idea = Idea.new("dinner", "beef stew")
+    idea.id = 1
+    assert_equal 1, idea.id
   end
 end

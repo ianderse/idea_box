@@ -60,6 +60,20 @@ class IdeaStoreTest < Minitest::Test
     assert_equal ["dinner", "song"], IdeaStore.all.map(&:title).sort
   end
 
+  def test_delete_the_last_idea
+    id1 = IdeaStore.save Idea.new("song", "99 bottles of beer")
+
+    IdeaStore.delete(id1)
+
+    assert_equal [], IdeaStore.all
+  end
+
+  def test_edit_a_nonexistant_idea
+    id1 = IdeaStore.save Idea.new("song", "99 bottles of beer")
+
+    assert_equal "Idea doesn't exist", IdeaStore.find(3)
+  end
+
   def teardown
     IdeaStore.delete_all
   end

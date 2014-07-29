@@ -1,20 +1,28 @@
 class IdeaStore
 
+  def self.all
+    @all
+  end
+
+  def self.delete(id)
+    @all.delete_at(id - 1)
+  end
+
   def self.save(idea)
     @all ||= []
     if idea.new?
       idea.id = next_id
-      @all << idea
+      all << idea
     end
     idea.id
   end
 
   def self.count
-    @all.count
+    all.count
   end
 
   def self.find(id)
-    @all.find do |idea|
+    all.find do |idea|
       idea.id == id
     end
   end
